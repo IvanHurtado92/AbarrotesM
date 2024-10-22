@@ -141,14 +141,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <input id="PProveedor" name="pproveedor" placeholder="Precio Proveedor"
+                            <input id="PProveedor" name="precioProv" placeholder="Precio Proveedor"
                                    title="PrecioProveedor" type="text" value="" size="25"
                                    onkeypress="return permite(event, 'num')"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input id="PUnitario" name="punitario" placeholder="Precio Unitario"
+                            <input id="PUnitario" name="precioUni" placeholder="Precio Unitario"
                                    title="Precio Unitario" type="text" value="" size="25"
                                    onkeypress="return permite(event, 'num')"/>
                         </td>
