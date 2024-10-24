@@ -108,10 +108,17 @@
                                    title="PrecioUnitario" type="text" value="<%= producto.getPrecioUni()%>" size="25"/>
                         </td>
                     </tr>
-                    <td>
-                        <input id="Fech" name="fech" placeholder="Fech"
-                               title="Fech" type="text" value="<%= producto.getFech()%>" size="25"/>
-                    </td>
+                    <tr>
+                        <td>
+                            <input id="Exitencias" name="existencias" placeholder="Existencias"
+                                   title="Existencias" type="text" value="<%= producto.getExistencias()%>" size="25"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="Fech" name="fech" placeholder="Fech"
+                                   title="Fech" type="text" value="<%= producto.getFech()%>" size="25"/>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -148,13 +155,14 @@
                         productoActualizado.setCaducidad(request.getParameter("caducidad"));
                         productoActualizado.setPrecioProv(Float.parseFloat((request.getParameter("pproveedor"))));
                         productoActualizado.setPrecioUni(Float.parseFloat(request.getParameter("punitario")));
+                        productoActualizado.setExistencias(Integer.parseInt(request.getParameter("existencias")));
                         productoActualizado.setFech(request.getParameter("fech"));
                         productoActualizado.setMarca(request.getParameter("marca"));
                         productoActualizado.setIdProveedor(Integer.parseInt(request.getParameter("idProveedor")));
 
                         ProductoDAO DAO = new ProductoDAO();
                         DAO.actualizaProducto(productoActualizado);
-                        out.println("<h2>Producto actualizado con éxito.</h2>\n<a href=\"EliminarProducto.jsp\">Regresar</a>\n<a href=\"ModificarProducto.jsp\">Recargar página</a>");
+                        out.println("<h2>Producto actualizado con éxito.</h2>\n<h3><a href=\"EliminarProducto.jsp\">Regresar</a></h3>\n<h4><a href=\"ModificarProducto.jsp\">Recargar página</a></h4>");
                     }
         %>
     </body>

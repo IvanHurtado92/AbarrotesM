@@ -92,7 +92,7 @@
     %>
     <center>
         <h3>El usuario y/ó contraseña son incorrectos.</h3>
-        <a href="AutentificarEmpleado.jsp">Intentar de nuevo</a>
+        <a href="AutentificarAdmon.jsp">Intentar de nuevo</a>
     </center>
     <%                }
         }
