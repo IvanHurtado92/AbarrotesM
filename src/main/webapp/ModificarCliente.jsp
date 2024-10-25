@@ -18,7 +18,6 @@
         <h1>Portal de modificacion de datos del cliente</h1>
         <% ClienteDAO clienteDAO = new ClienteDAO();
             List<Cliente> listaClientes = clienteDAO.obtenListaCliente();
-            int valor = 0;
         %>
         <form>
             <CENTER>
@@ -38,7 +37,6 @@
                         <th>Contraseña</th>
                         <th>Direccion</th>
                         <th>Telefono</th>
-                        <th>Carrito</th>
                         </tr>
                     </thead>
                     <%  for (Cliente a : listaClientes) { 
@@ -54,92 +52,94 @@
                         <td><%= a.getPassword() %></td>
                         <td><%= a.getDireccion() %></td>
                         <td><%= a.getTelefono() %></td>
-                        <td><%= a.getCarrito() %></td>
-                        <td><input type="checkbox" name="cbactores" value="<%=a.getIdCliente()%>"/></td>
+                        <td><input type="radio" name="rselect" value="<%=a.getIdCliente()%>"/></td>
                     </tr>
                     <%
-                            valor = a.getIdCliente().intValue();
                         }
                     %>
                 </table>
+                <input type="hidden" name="admin" value="<%=request.getParameter("admin")%>">
                 <input type="submit" value="Actualizar seleccionado" name="actualizar" />
-                <a href="EliminarCliente.jsp">Regresar</a>
+                <a href="EliminarCliente.jsp?admin=<%=request.getParameter("admin")%>">Regresar</a>
                 <%
                     if ((request.getParameter("actualizar") != null)) {
                 %>
                 <h2>Insertar producto</h2>
                 <table border="1"  cellpadding="0" cellspacing="0" height="40%" width="25">
-                    <jsp:useBean id="producto" scope="page" class="Mapeos.Cliente" />
-                    <jsp:setProperty name="producto" property="*" />
                     <%
-                        String[] chbProductos = request.getParameterValues("cbactores");
-                        for (int i = 0; i <= chbProductos.length; i++) {
-                            if (i == chbProductos.length) {
+                        String IDtabla = request.getParameter("rselect");
+
+                        if (IDtabla != null){
+                            out.println("<h2>Actualizar cliente</h2>");
+                            Integer selectID = Integer.parseInt(IDtabla);
+                            Cliente cliente = new Cliente();
+                            for(Cliente a : listaClientes){
+                                if(a.getIdCliente().equals(selectID)){
+                                    cliente = a;
+                                    break;
+                                }
+                            }
                     %>
                     <tr>
                         <td>
+                            <input type="hidden" name="idCliente" value="<%= selectID %>">
+                            <input type="hidden" name="admin" value="<%=request.getParameter("admin")%>">
                             <input id="Nombre" name="nombre" placeholder="Nombre"
-                                   title="Nombre del cliente" type="text" value="<%= listaClientes.get(i - 1).getNombre() %> " size="25"/>
+                                   title="Nombre del cliente" type="text" value="<%= cliente.getNombre() %> " size="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input id="Apell_pat" name="apellPat" placeholder="Apellido paterno "
-                                   title="Apellido Paterno" type="text" value="<%= listaClientes.get(i - 1).getApellPat() %>" size="25"/>
+                                   title="Apellido Paterno" type="text" value="<%= cliente.getApellPat() %>" size="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input id="Apell_mat" name="apellMat" placeholder="Apellido materno"
-                                   title="Apellido materno" type="text" value="<%= listaClientes.get(i - 1).getApellMat() %>" size="25"/>
+                                   title="Apellido materno" type="text" value="<%= cliente.getApellMat() %>" size="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input id="Fecha_nac" name="fechaNac" placeholder="Fecha de nacimiento "
-                                   title="Fecha de nacimiento" type="text" value="<%= listaClientes.get(i - 1).getFechaNac() %>" size="25"/>
+                                   title="Fecha de nacimiento" type="text" value="<%= cliente.getFechaNac() %>" size="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input id="RFC" name="rfc" placeholder="RFC "
-                                   title="RFC cliente" type="text" value="<%= listaClientes.get(i - 1).getRfc() %>" size="25"/>
+                                   title="RFC cliente" type="text" value="<%= cliente.getRfc() %>" size="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input id="Correo" name="correo" placeholder="Email"
-                                   title="Correo electronico" type="text" value="<%= listaClientes.get(i - 1).getCorreo() %>" size="25"/>
+                                   title="Correo electronico" type="text" value="<%= cliente.getCorreo() %>" size="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input id="Password" name="password" placeholder="Contraseña"
-                                   title="Contraseña" type="password" value="<%= listaClientes.get(i - 1).getPassword() %>" size="25"/>
+                                   title="Contraseña" type="password" value="<%= cliente.getPassword() %>" size="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input id="direccion" name="direccion" placeholder="Dirección"
-                                   title="Dirección" type="text" value="<%= listaClientes.get(i - 1).getDireccion() %>" size="25"/>
+                                   title="Dirección" type="text" value="<%= cliente.getDireccion() %>" size="25"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input id="telefono" name="telefono" placeholder="Telefono"
-                                   title="Telefono" type="text" value="<%= listaClientes.get(i - 1).getTelefono() %>" size="10"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input id="carrito" name="carrito" placeholder="Carrito"
-                                   title="Carrito" type="text" value="<%= listaClientes.get(i - 1).getCarrito() %>" size="10"/>
+                                   title="Telefono" type="text" value="<%= cliente.getTelefono() %>" size="10"/>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <input id="submit" name="submit" type="submit" value="Crear">
+                            <input id="submit" name="Actualizar Cliente" type="submit" value="Actualizar">
                             <input type="reset" value="Limpiar">
                         </td>
                     </tr>
@@ -147,9 +147,31 @@
             </CENTER>
         </form>
         <%
-                    }
-                }
             }
+            else{
+                out.println("<h2>Debes seleccionar un cliente para eliminarlo.</h2>");
+            }
+            }
+                        if(request.getParameter("Actualizar Cliente") != null){
+                            Cliente clienteAct = new Cliente();
+                            clienteAct.setIdCliente(Integer.parseInt(request.getParameter("idCliente")));
+                            clienteAct.setNombre(request.getParameter("nombre"));
+                            clienteAct.setApellPat(request.getParameter("apellPat"));
+                            clienteAct.setApellMat(request.getParameter("apellMat"));
+                            clienteAct.setFechaNac(request.getParameter("fechaNac"));
+                            clienteAct.setRfc(request.getParameter("rfc"));
+                            clienteAct.setCorreo(request.getParameter("correo"));
+                            clienteAct.setPassword(request.getParameter("password"));
+                            clienteAct.setDireccion(request.getParameter("direccion"));
+                            clienteAct.setTelefono(request.getParameter("telefono"));
+
+                            ClienteDAO DAO = new ClienteDAO();
+                            DAO.actualizaCliente(clienteAct);
+                            out.println("<h2>Producto actualizado con éxito.</h2>\n" +
+                                    "<h3><a href='EliminarCliente.jsp?admin=" + request.getParameter("admin") + "'>Regresar</a></h3>\n" +
+                                    "<h4><a href='ModificarCliente.jsp?admin=" + request.getParameter("admin") + "'>Recargar página</a></h4>");
+                        }
+
         %>
     </body>
 </html>

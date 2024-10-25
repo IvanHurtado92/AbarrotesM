@@ -21,11 +21,19 @@
         <form>
             <CENTER>
                 <HR>
-                 <I>Crear Cuanta Cliente<a href="AutentificarCliente.jsp">Cerrar Sesion</a></I>
+                 <I>Crear Cuanta Cliente<a href="<%
+                if(request.getParameter("admin").equals("1")){
+                    out.println("AutentificarAdmon.jsp");
+                }
+                else {
+                    out.println("AutentificarEmpleado.jsp");
+                }
+                %>">  Cerrar Sesion</a></I>
                 <table border="1"  cellpadding="0" cellspacing="0" 
                        height="40%" width="25">
                     <tr>
                         <td>
+                            <input type="hidden" name="admin" value="<%=request.getParameter("admin")%>">
                             <input id="Nombre" name="nombre" placeholder="Nombre"
                                    title="Nombre del cliente" type="text" value="" size="25"/>
                         </td>
@@ -85,7 +93,7 @@
                         </td>
                     </tr>
                 </table>
-                <a href="Principal.html">Regresar</a>
+                <a href="EliminarCliente.jsp?admin=<%=request.getParameter("admin")%>">Regresar</a>
             </CENTER>
         </form> 
         <%        } else {%>
@@ -126,7 +134,8 @@
                 </tr>
             <h2>Registro completado</h2>
         </tbody>
-    </table> 
+    </table>
+        <a href="EliminarCliente.jsp?admin=<%=request.getParameter("admin")%>">Regresar</a>
     <% } else {%>
     <h2>Lo sentimos, no se pudo crear la cuenta</h2>
     <%}

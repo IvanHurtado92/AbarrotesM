@@ -72,9 +72,9 @@
     <center>
         <h3>Bienvenido <% out.println(uname.getNombreEmpleado().toString());%></h3>
         <P> <B>PORTAL PARA LOS PRODUCTOS</B> </P>
-        <input type="button" onclick=" location.href = 'EliminarProducto.jsp' " value="Productos" name="boton" />
+        <input type="button" onclick=" location.href = 'EliminarProducto.jsp?admin=0' " value="Productos" name="boton" />
         <P> <B>PORTAL PARA LA CONFIGURACION DE CLIENTES</B> </P>
-        <input type="button" onclick=" location.href = 'EliminarCliente.jsp' " value="Clientes" name="boton" />
+        <input type="button" onclick=" location.href = 'EliminarCliente.jsp?admin=0' " value="Clientes" name="boton" />
     </center>
     <%  break;
     } else {

@@ -22,7 +22,14 @@
         <form>
             <CENTER>
                 <HR> 
-                <I>Selecciona el producto a actualizar.<a href="AutentificarAdmon.jsp">Cerrar Sesion</a> </I>.
+                <I>Selecciona el producto a actualizar.<a href="<%
+                if(request.getParameter("admin").equals("1")){
+                    out.println("AutentificarAdmon.jsp");
+                }
+                else {
+                    out.println("AutentificarEmpleado.jsp");
+                }
+                %>">  Cerrar Sesion</a> </I>.
                 </HR>
                 <table border="1">
                     <thead>
@@ -50,36 +57,41 @@
                         <td><%= a.getExistencias()%></td>
                         <td><%= a.getFech()%></td>
                         <td><%= a.getMarca()%></td>
-                        <td><input type="radio" name="cbactores" value="<%=a.getIdProducto()%>"/></td>
+                        <td>
+                            <input type="radio" name="rselect" value="<%=a.getIdProducto()%>"/>
+                        </td>
                     </tr>
                     <%
                         }
                     %>
                 </table>
+                <input type="hidden" name="admin" value="<%=request.getParameter("admin")%>">
                 <input type="submit" value="Actualizar seleccionado" name="actualizar" />
-                <a href="EliminarProducto.jsp">Regresar</a>
+                <a href="EliminarProducto.jsp?admin=<%=request.getParameter("admin")%>">Regresar</a>
                 <%
-                    if ((request.getParameter("actualizar") != null)) {
+                    if ((request.getParameter("actualizar") != null )) {
                 %>
-                <h2>Actualizar producto</h2>
+
                 <table border="1"  cellpadding="0" cellspacing="0" height="40%" width="25">
                     <%
-                        Producto producto = new Producto();
-                        String IDtabla = request.getParameter("cbactores");
-                        Integer selectID = Integer.parseInt(IDtabla);
+                        String IDtabla = request.getParameter("rselect");
 
                         if (IDtabla != null){
+                            out.println("<h2>Actualizar producto</h2>");
+                            Integer selectID = Integer.parseInt(IDtabla);
+                            Producto producto = new Producto();
                             for(Producto a : listaProductos){
-                                if(a.getIdProducto() == selectID){
+                                if(a.getIdProducto().equals(selectID)){
                                     producto = a;
                                     break;
                                 }
                             }
-                        }
+
                     %>
                     <tr>
                         <td>
                             <input type="hidden" name="idProducto" value="<%= selectID %>">
+                            <input type="hidden" name="admin" value="<%=request.getParameter("admin")%>">
                             <input id="Nombre_producto" name="nombreProducto" placeholder="Nombre de producto"
                                    title="Nombre de producto" type="text" value="<%= producto.getNombreProducto()%> " size="25"/>
                         </td>
@@ -135,7 +147,7 @@
 
                     <tr>
                         <td>
-                                <input id="submit" name="Actualizar Producto" type="submit" value="Actualizar">
+                            <input id="submit" name="Actualizar Producto" type="submit" value="Actualizar">
                             <input type="reset" value="Limpiar">
                         </td>
                     </tr>
@@ -143,6 +155,10 @@
             </CENTER>
         </form>
         <%
+            }
+            else {
+                out.println("<h2>Debes seleccionar un producto para eliminarlo.</h2>");
+            }
             }
                     if(request.getParameter("Actualizar Producto") != null){
 
@@ -162,7 +178,9 @@
 
                         ProductoDAO DAO = new ProductoDAO();
                         DAO.actualizaProducto(productoActualizado);
-                        out.println("<h2>Producto actualizado con éxito.</h2>\n<h3><a href=\"EliminarProducto.jsp\">Regresar</a></h3>\n<h4><a href=\"ModificarProducto.jsp\">Recargar página</a></h4>");
+                        out.println("<h2>Producto actualizado con éxito.</h2>\n" +
+                                "<h3><a href='EliminarProducto.jsp?admin=" + request.getParameter("admin") + "'>Regresar</a></h3>\n" +
+                                "<h4><a href='ModificarProducto.jsp?admin=" + request.getParameter("admin") + "'>Recargar página</a></h4>");
                     }
         %>
     </body>

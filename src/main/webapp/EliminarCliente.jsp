@@ -22,7 +22,14 @@
         %>
         <form>
             <HR> 
-            <I>Para eliminar un cliente seleccionarlo en la columna final <a href="AutentificarEmpleado.jsp">  Cerrar Sesion</a></I>.
+            <I>Para eliminar un cliente seleccionarlo en la columna final <a href="<%
+                if(request.getParameter("admin").equals("1")){
+                    out.println("AutentificarAdmon.jsp");
+                }
+                else {
+                    out.println("AutentificarEmpleado.jsp");
+                }
+            %>">  Cerrar Sesion</a></I>.
             </HR>
             <table border="1">
                 <thead>
@@ -37,7 +44,6 @@
                         <th>Contraseña</th>
                         <th>Direccion</th>
                         <th>Telefono</th>
-                        <th>Carrito</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,23 +60,32 @@
                         <td><%= a.getPassword() %></td>
                         <td><%= a.getDireccion() %></td>
                         <td><%= a.getTelefono() %></td>
-                        <td><%= a.getCarrito() %></td>
-                        <td><input type="checkbox" name="cbactores" value="<%=a.getIdCliente()%>"/></td>
+                        <td>
+                            <input type="checkbox" name="cbactores" value="<%=a.getIdCliente()%>"/>
+                            <input type="hidden" name="admin" value="<%=request.getParameter("admin")%>">
+                        </td>
                     </tr>
                     <% }
                     %>
                 </tbody>
             </table>
             <input type="submit" value="Eliminar Seleccionados" name="eliminar" />
-            <input type="button" onclick=" location.href='ModificarCliente.jsp' " value="Actualizar Cliente " name="boton" />
+            <input type="button" onclick=" location.href = 'InsertarCliente.jsp?admin=<%=request.getParameter("admin")%>' " value="Nuevo Cliente" name="boton" />
+            <input type="button" onclick=" location.href = 'ModificarCliente.jsp?admin=<%=request.getParameter("admin")%>' " value="Actualizar Cliente" name="boton" />
         </form>
         <%
             if (request.getParameter("eliminar") != null) {
                 String[] chbClientes = request.getParameterValues("cbactores");
-                for (int i = 0; i < chbClientes.length; i++) {
-                    out.println("<li>" + chbClientes[i]);
-                    clienteDAO.eliminaCliente(Short.valueOf(chbClientes[i]));
-                    out.println(" El cliente ha sido eliminado");
+
+                if (chbClientes != null && chbClientes.length > 0) {
+                    for (int i = 0; i < chbClientes.length; i++) {
+                        out.println("<li>" + chbClientes[i]);
+                        clienteDAO.eliminaCliente(Short.valueOf(chbClientes[i]));
+                        out.println(" El cliente ha sido eliminado");
+                    }
+                } else {
+                    // Si no hay empleados seleccionados, mostramos un mensaje de advertencia
+                    out.println("<p>Debes seleccionar al menos un cliente para eliminarlo.</p>");
                 }
             }
         %>

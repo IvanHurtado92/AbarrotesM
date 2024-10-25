@@ -71,10 +71,12 @@
         %>
     <center>
         <h3>Bienvenido <% out.println(uname.getNombreEmpleado().toString());%></h3>
-        <P> <B>PORTAL PARA LOS PRODUCTOS</B> </P>
-        <input type="button" onclick=" location.href = 'EliminarProducto.jsp' " value="Productos" name="boton" />
-        <P> <B>PORTAL PARA LA CONFIGURACION DE CLIENTES</B> </P>
-        <input type="button" onclick=" location.href = 'EliminarCliente.jsp' " value="Clientes" name="boton" />
+            <P> <B>PORTAL PARA LOS PRODUCTOS</B> </P>
+            <input type="button" onclick=" location.href = 'EliminarProducto.jsp?admin=1' " value="Productos" name="boton" />
+            <P> <B>PORTAL PARA LA CONFIGURACION DE EMPLEADOS</B> </P>
+            <input type="button" onclick=" location.href = 'EliminarEmpleado.jsp?admin=1' " value="Empleados" name="boton" />
+            <P> <B>PORTAL PARA LA CONFIGURACION DE CLIENTES</B> </P>
+            <input type="button" onclick=" location.href = 'EliminarCliente.jsp?admin=1' " value="Clientes" name="boton" />
     </center>
     <%  break;
     } else {

@@ -72,10 +72,9 @@ public class EmpleadoDAO {
         return listaEmpleados;
     }
 
-    public void actualizaEmpleado(int EmpleadoNo) throws HibernateException {
+    public void actualizaEmpleado(Empleado empleado) throws HibernateException {
         try {
             iniciaOperacion();
-            Empleado empleado = (Empleado) sesion.get(Empleado.class, EmpleadoNo);
             sesion.update(empleado);
             tx.commit();
         } catch (HibernateException he) {

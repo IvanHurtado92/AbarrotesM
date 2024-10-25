@@ -116,11 +116,19 @@
         <form onsubmit="return validacion()">
             <CENTER>
                 <HR>
-                <I>Insertar Producto.<a href="AutentificarEmpleado.jsp">Cerrar Sesion</a></I>
+                <I>Insertar Producto.<a href="<%
+                if(request.getParameter("admin").equals("1")){
+                    out.println("AutentificarAdmon.jsp");
+                }
+                else {
+                    out.println("AutentificarEmpleado.jsp");
+                }
+                %>">  Cerrar Sesion</a></I>
                 <table border="1"  cellpadding="0" cellspacing="0" 
                        height="40%" width="25">
                     <tr>
                         <td>
+                            <input type="hidden" name="admin" value="<%=request.getParameter("admin")%>">
                             <input id="Nombre_producto" name="nombreProducto" placeholder="Nombre de producto"
                                    title="Nombre de producto" type="text" value="" size="25"
                                    onkeypress="return permite(event, 'car')"/>
@@ -187,7 +195,7 @@
                         </td>
                     </tr>
                 </table>
-                <a href="EliminarProducto.jsp">Regresar</a>
+                <a href="EliminarProducto.jsp?admin=<%=request.getParameter("admin")%>">Regresar</a>
             </CENTER>
         </form>
         <%        } else {%>
@@ -229,7 +237,7 @@
             <h2>Empleado agregado</h2>
         </tbody>
     </table>
-    <a href="EliminarProducto.jsp">Regresar</a>
+        <a href="EliminarProducto.jsp?admin=<%=request.getParameter("admin")%>">Regresar</a>
     <% } else {%>
     <h2>Lo sentimos, no se puedo insertar el registro</h2>
     <%}

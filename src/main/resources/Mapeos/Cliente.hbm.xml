@@ -29,6 +29,12 @@
         <property name="password" type="string">
             <column name="Password" length="100" />
         </property>
+        <property name="direccion" type="string">
+            <column name="Direccion" length="100" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="Telefono" length="100" />
+        </property>
         <one-to-one name="paquete" class="Mapeos.Paquete"></one-to-one>
         <one-to-one name="pedido" class="Mapeos.Pedido"></one-to-one>
     </class>

@@ -7,6 +7,8 @@
 <%@page import="Mapeos.Empleado"%>
 <%@page import="java.util.List"%>
 <%@page import="Beans.EmpleadoDAO"%>
+<%@ page import="java.util.stream.Collectors" %>
+<%@ page import="java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +19,14 @@
     <body>
         <h1>Portal de información del empleado</h1>
         <% EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-            List<Empleado> listaEmpleados = empleadoDAO.obtenListaEmpleado();
+            List<Empleado> lista = empleadoDAO.obtenListaEmpleado();
+            List<Empleado> listaEmpleados = new ArrayList<>();
+
+            for(Empleado a : lista) {
+                if(a.getTipoUsuario().equals("Empleado")){
+                    listaEmpleados.add(a);
+                }
+            }
         %>
         <form>
             <HR> 
@@ -56,7 +65,10 @@
                         <td><%= a.getEstatus()%></td>
                         <td><%= a.getNivelEstudio()%></td>
                         <td><%= a.getTipoUsuario()%></td>
-                        <td><input type="checkbox" name="cbactores" value="<%=a.getNoEmpleado()%>"/></td>
+                        <td>
+                            <input type="checkbox" name="cbactores" value="<%=a.getNoEmpleado()%>"/>
+                            <input type="hidden" name="admin" value="<%=request.getParameter("admin")%>">
+                        </td>
                     </tr>
                     <% }
                     %>
@@ -64,24 +76,26 @@
             </table>
             <input type="submit" value="Eliminar Seleccionados" name="eliminar" />
             <input type="button" onclick=" location.href='InsertarEmpleado.jsp' " value="Insertar Empleado" name="boton" />
-            <input type="button" onclick=" location.href='ModificarEmpleado.jsp' " value="Modificar Empleado " name="boton" />
+            <input type="button" onclick=" location.href='ModificarEmpleado.jsp' " value="Actualizar Empleado " name="boton" />
         </form>
         <%
             if (request.getParameter("eliminar") != null) {
                 String[] chbEmpleados = request.getParameterValues("cbactores");
-                for (int i = 0; i < chbEmpleados.length; i++) {
-                    out.println("<li>" + chbEmpleados[i]);
-                    empleadoDAO.eliminaEmpleado(Short.valueOf(chbEmpleados[i]));
-                    out.println(" El empleado ha sido eliminado");
+
+                // Verificamos si se seleccionó al menos un empleado
+                if (chbEmpleados != null && chbEmpleados.length > 0) {
+                    for (int i = 0; i < chbEmpleados.length; i++) {
+                        out.println("<li>" + chbEmpleados[i]);
+                        empleadoDAO.eliminaEmpleado(Short.valueOf(chbEmpleados[i]));
+                        out.println(" El empleado ha sido eliminado");
+                    }
+                } else {
+                    // Si no hay empleados seleccionados, mostramos un mensaje de advertencia
+                    out.println("<p>Debes seleccionar al menos un empleado para eliminarlo.</p>");
                 }
             }
-            //String[] chbEmpleados = request.getParameterValues("cbactores");
-            //for ( int i = 0; i <= chbEmpleados.length; i++ ) {
-              //              if ( i == 0 ) {
-                //                out.println("Por favor, selecciona un empleado para eliminar");
-                  //          }
-            //}
         %>
+
     </body>
 </html>
     

@@ -21,7 +21,14 @@
         %>
         <form>
             <HR> 
-            <I>Para eliminar un producto seleccionarlo en la columna final <a href="AutentificarEmpleado.jsp">  Cerrar Sesion</a></I>.
+            <I>Para eliminar un producto seleccionarlo en la columna final <a href="<%
+                if(request.getParameter("admin").equals("1")){
+                    out.println("AutentificarAdmon.jsp");
+                }
+                else {
+                    out.println("AutentificarEmpleado.jsp");
+                }
+            %>">  Cerrar Sesion</a></I>.
             </HR>
             <table border="1">
                 <thead>
@@ -50,24 +57,33 @@
                         <td><%= a.getExistencias()%></td>
                         <td><%= a.getFech()%></td>
                         <td><%= a.getMarca()%></td>
-                        <td><input type="checkbox" name="cbactores" value="<%=a.getIdProducto()%>"/></td>
+                        <td>
+                            <input type="checkbox" name="cbactores" value="<%=a.getIdProducto()%>"/>
+                            <input type="hidden" name="admin" value="<%=request.getParameter("admin")%>">
+                        </td>
                     </tr>
                     <% }
                     %>
                 </tbody>
             </table>
             <input type="submit" value="Eliminar Seleccionados" name="eliminar" />
-            <input type="button" onclick=" location.href = 'InsertarProducto.jsp' " value="Nuevo Producto" name="boton" />
-            <input type="button" onclick=" location.href = 'ModificarProducto.jsp' " value="Actualizar Producto" name="boton" />
+            <input type="button" onclick=" location.href = 'InsertarProducto.jsp?admin=<%=request.getParameter("admin")%>' " value="Nuevo Producto" name="boton" />
+            <input type="button" onclick=" location.href = 'ModificarProducto.jsp?admin=<%=request.getParameter("admin")%>' " value="Actualizar Producto" name="boton" />
         </form>
         <%
             if (request.getParameter("eliminar") != null) {
                 String[] chbproductos = request.getParameterValues("cbactores");
-                for (int i = 0; i < chbproductos.length; i++) {
-                    out.println("<li>" + chbproductos[i]);
-                    productoDAO.eliminaProducto(Short.valueOf(chbproductos[i]));
-                    out.println(" El producto ha sido eliminado");
+
+                if(chbproductos != null && chbproductos.length > 0){
+                    for (int i = 0; i < chbproductos.length; i++) {
+                        out.println("<li>" + chbproductos[i]);
+                        productoDAO.eliminaProducto(Short.valueOf(chbproductos[i]));
+                        out.println(" El producto ha sido eliminado");
+                    }
+                } else {
+                    out.println("<p>Debes seleccionar al menos un producto para eliminarlo.</p>");
                 }
+
             }
         %>
     </body>

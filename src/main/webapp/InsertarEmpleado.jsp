@@ -183,7 +183,7 @@
                     <tr>
                         <td>
                             <input id="RFCE" name="rfce" placeholder="RFC empleado"
-                                   title="RFC" type="text" value="" size="25" onkeypress="return permite(event, 'car')"/>
+                                   title="RFC" type="text" value="" size="25" onkeypress="return permite(event, 'num_car')"/>
                         </td>
                     </tr>
                     <tr>
@@ -207,6 +207,7 @@
                             <select id="Estatus_emp" name="estatus"> 
                                 <option value="Laborando">Laborando</option>
                                 <option value="Desempleado">Desempleado</option>
+                                <option value="Retirado">Retirado</option>
                                 <option value="Periodo Vacacional">Periodo Vacacional</option>
                                 <option value="Incapacitado o lactancia">Incapacitado o lactancia</option>
                             </select>
