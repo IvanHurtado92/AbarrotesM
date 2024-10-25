@@ -249,8 +249,8 @@
                     <th>RFC</th>
                     <th>Email</th>
                     <th>Contraseña</th>
-                    <%--<th>Dirección</th>
-                    <th>Telefono</th>--%>
+                    <<th>Dirección</th>
+                    <th>Telefono</th>
                 </tr>
             </thead>
             <tbody>
@@ -263,10 +263,11 @@
                     <td><%= cliente.getRfc()%></td>
                     <td><%= cliente.getCorreo()%></td>
                     <td><%= cliente.getPassword()%></td>
-                    <%--<td><%= cliente.getDireccion()%></td>
-                    <td><%= cliente.getTelefono()%></td>--%>
+                    <td><%= cliente.getDireccion()%></td>
+                    <td><%= cliente.getTelefono()%></td>-
                 </tr>
             <h2>Registro completado</h2>
+            <h2><a href="Principal.html">Regresar</a></h2>
         </tbody>
     </table> 
     <% } else {%>
