@@ -6,4 +6,4 @@ Desarrollado desde la IDE Intelij
 
 ##### JDK 1.8
 ##### Tomcat 8.5.93
-##### Mysqul 8
+##### MySQL 8
