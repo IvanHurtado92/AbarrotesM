@@ -7,3 +7,17 @@ Desarrollado desde la IDE Intelij
 ##### JDK 1.8
 ##### Tomcat 8.5.93
 ##### MySQL 8
+
+
+### Forma de creación del proyecto
+##### Jackarta EE
+##### Java
+##### Maven
+
+#### Specifications
+##### Web profile
+#### Implementations
+##### Eclipse Jersey Server
+##### Hibernate
+##### Hibernate Validator
+##### Weld SE
