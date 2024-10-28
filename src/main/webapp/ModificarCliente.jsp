@@ -22,7 +22,14 @@
         <form>
             <CENTER>
                 <HR> 
-                <I>Para modificar un cliente seleccionar las filas desde el primer cliente hasta el que se desea modificar en la columna final.<a href="AutentificarEmpleado.jsp">Cerrar Sesion</a> </I>.
+                <I>Para modificar un cliente seleccionar las filas desde el primer cliente hasta el que se desea modificar en la columna final.<a href="<%
+                if(request.getParameter("admin").equals("1")){
+                    out.println("AutentificarAdmon.jsp");
+                }
+                else {
+                    out.println("AutentificarEmpleado.jsp");
+                }
+                %>">  Cerrar Sesion</a> </I>.
                 </HR>
                 <table border="1">
                     <thead>

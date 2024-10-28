@@ -66,7 +66,7 @@
                 uname.setPassword(request.getParameter("contrasenia"));
                 if ((uname.getNombreEmpleado().toString().equals(listaEmpleados.get(i).getNombreEmpleado().toString()))
                         && (uname.getPassword().toString().equals(listaEmpleados.get(i).getPassword().toString()))) {
-                    if (listaEmpleados.get(i).getTipoUsuario().toString().equals("Empleado") || listaEmpleados.get(i).getTipoUsuario().toString().equals("Administrador")) {
+                    if (listaEmpleados.get(i).getTipoUsuario().toString().equals("Administrador")) {
                         us = true;
         %>
     <center>
