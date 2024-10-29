@@ -7,13 +7,13 @@
 <%@page import="Mapeos.Producto"%>
 <%@page import="java.util.List"%>
 <%@page import="Beans.ProductoDAO"%>
-<link rel="stylesheet" type="text/css" href="css.css" title="style">
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>producto</title>
+        <link rel="stylesheet" type="text/css" href="css.css" title="style">
     </head>
     <script type="text/javascript" src="XHR.js"></script>
     <script type="text/javascript">
