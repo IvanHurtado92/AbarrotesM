@@ -13,10 +13,14 @@ Desarrollado desde la IDE Intellij
 1. Seleccionar Jackarta EE
 2. Elegir Java y Maven
 
-#### Specifications
-- Web profile
-#### Implementations
-- Eclipse Jersey Server
-- Hibernate
-- Hibernate Validator
-- Weld SE
+- Specifications
+  - Web profile
+- Implementations
+  - Eclipse Jersey Server
+  - Hibernate
+  - Hibernate Validator
+  - Weld SE
+
+## Funciones faltantes
+- [ ] Carrito de compras
+- [ ] Historial de compras 
