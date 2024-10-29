@@ -82,7 +82,6 @@
     %>
     <center>
         <h3>ACCESO DENEGADO - SOLO PERSONAL AUTORIZADO</h3>
-        <a href="Principal.html">Pagina Principal</a>
     </center>
     <%   break;
                 }
