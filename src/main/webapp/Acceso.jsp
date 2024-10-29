@@ -66,7 +66,7 @@
         %>
     <center>
         <h3>Bienvenido <% out.println(uname.getNombre().toString());%></h3>
-        <input type="button" onclick=" location.href = 'Ventas.jsp'" value="Consultar los productos" name="boton" />
+        <input type="button" onclick=" location.href = 'Ventas.jsp?id=<%=listaClientes.get(i).getIdCliente().toString()%>'" value="Consultar los productos" name="boton" />
     </center>
     <%    break;
     } else {
