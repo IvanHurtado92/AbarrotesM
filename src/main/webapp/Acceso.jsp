@@ -24,29 +24,27 @@
                             <li> <a href="registro.jsp"  class = "normalMenu">Registrate_Aquí</a></li>
                     </ul>
                 </div>
-                <table border="1" width="30%" cellpadding="3">
-                    <thead>
-                        <tr>
-                            <th colspan="2">Login</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Nombre</td>
-                            <td><input type="text" name="usuario" value="" /></td>
-                        </tr>
-                        <tr>
-                            <td>Password</td>
-                            <td><input type="password" name="contrasenia" value="" /></td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" name="enviar" value="Entrar" /></td>
-                            <td><input type="reset" value="Limpiar" /></td>
-                        </tr>
+                <div  id="formulario">
+                <h2>Login</h2>
+                    <table border="1" width="30%" cellpadding="3">
+                        <tbody>
+                            <tr>
+                                <td>Nombre</td>
+                                <td><input type="text" name="usuario" value="" /></td>
+                            </tr>
+                            <tr>
+                                <td>Password</td>
+                                <td><input type="password" name="contrasenia" value="" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" name="enviar" value="Entrar" /></td>
+                                <td><input type="reset" value="Limpiar" /></td>
+                            </tr>
 
-                    </tbody>
-                </table>
-                <a href="Principal.html">Pagina Principal</a>
+                        </tbody>
+                    </table>
+                    <a href="Principal.html">Pagina Principal</a>
+                </div>
             </center>
         </form>
         <% if (request.getParameter("enviar") != null) {%>
@@ -64,10 +62,16 @@
                         && (uname.getPassword().toString().equals(listaClientes.get(i).getPassword().toString()))) {
                     us = true;
         %>
-    <center>
-        <h3>Bienvenido <% out.println(uname.getNombre().toString());%></h3>
-        <input type="button" onclick=" location.href = 'Ventas.jsp?id=<%=listaClientes.get(i).getIdCliente().toString()%>'" value="Consultar los productos" name="boton" />
-    </center>
+        <script>
+            document.getElementById("formulario").style["display"] = 'none'
+        </script>
+        <center>
+            <br>
+            <h3>Bienvenido <% out.println(uname.getNombre().toString());%></h3>
+            <input type="button" onclick=" location.href = 'Ventas.jsp?id=<%=listaClientes.get(i).getIdCliente().toString()%>'" value="Ir al carrito" name="boton" />
+            <h5></h5>
+            <a href="Principal.html" id="prin2">Pagina Principal</a>
+        </center>
     <%    break;
     } else {
     %>

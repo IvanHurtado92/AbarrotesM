@@ -19,23 +19,20 @@
     <body>
         <form>
             <center>
-                <h1>Acceso del administrador</h1>
+                <h1>Acceso del empleado</h1>
                 <div id="menu">
                     <ul>
-                            <li><a href="Conocenos.jsp"  class = "normalMenu">Conocenos</a></li>
-                            <li><a href="Productos.jsp"  class = "normalMenu">Productos </a></li>
-                            <li><a href="Contacto.jsp"  class = "normalMenu">Contacto</a></li>
-                            <li><a href="Acceso.jsp"  class = "normalMenu">Ingresar</a></li>
-                            <li> <a href="registro.jsp"  class = "normalMenu">Registrate_Aquí</a></li>
+                        <li><a href="Conocenos.jsp"  class = "normalMenu">Conocenos</a></li>
+                        <li><a href="Productos.jsp"  class = "normalMenu">Productos </a></li>
+                        <li><a href="Contacto.jsp"  class = "normalMenu">Contacto</a></li>
+                        <li><a href="Acceso.jsp"  class = "normalMenu">Ingresar</a></li>
+                        <li> <a href="registro.jsp"  class = "normalMenu">Registrate_Aquí</a></li>
                     </ul>
                 </div>
-                <table border="1" width="30%" cellpadding="3">
-                    <thead>
-                        <tr>
-                            <th colspan="2">Login</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div id="formulario">
+                    <table border="1" width="30%" cellpadding="3">
+                        <h2>Login</h2>
+                        <tbody>
                         <tr>
                             <td>Nombre</td>
                             <td><input type="text" name="usuario" value="" /></td>
@@ -48,9 +45,10 @@
                             <td><input type="submit" name="enviar" value="Entrar" /></td>
                             <td><input type="reset" value="Limpiar" /></td>
                         </tr>
-                    </tbody>
-                </table>
-                <a href="Principal.html">Pagina Principal</a>
+                        </tbody>
+                    </table>
+                    <a href="Principal.html">Pagina Principal</a>
+                </div>
             </center>
         </form>
         <% if (request.getParameter("enviar") != null) {
@@ -70,13 +68,19 @@
                         us = true;
         %>
     <center>
+        <script>
+            document.getElementById("formulario").style["display"] = 'none'
+        </script>
+        <br>
         <h3>Bienvenido <% out.println(uname.getNombreEmpleado().toString());%></h3>
-            <P> <B>PORTAL PARA LOS PRODUCTOS</B> </P>
-            <input type="button" onclick=" location.href = 'EliminarProducto.jsp?admin=1' " value="Productos" name="boton" />
-            <P> <B>PORTAL PARA LA CONFIGURACION DE EMPLEADOS</B> </P>
-            <input type="button" onclick=" location.href = 'EliminarEmpleado.jsp?admin=1' " value="Empleados" name="boton" />
-            <P> <B>PORTAL PARA LA CONFIGURACION DE CLIENTES</B> </P>
-            <input type="button" onclick=" location.href = 'EliminarCliente.jsp?admin=1' " value="Clientes" name="boton" />
+        <P> <B>PORTAL PARA LOS PRODUCTOS</B> </P>
+        <input type="button" onclick=" location.href = 'EliminarProducto.jsp?admin=1' " value="Productos" name="boton" />
+        <P> <B>PORTAL PARA LA CONFIGURACION DE EMPLEADOS</B> </P>
+        <input type="button" onclick=" location.href = 'EliminarEmpleado.jsp?admin=1' " value="Empleados" name="boton" />
+        <P> <B>PORTAL PARA LA CONFIGURACION DE CLIENTES</B> </P>
+        <input type="button" onclick=" location.href = 'EliminarCliente.jsp?admin=1' " value="Clientes" name="boton" />
+        <h5></h5>
+        <a href="Principal.html">Pagina Principal</a>
     </center>
     <%  break;
     } else {

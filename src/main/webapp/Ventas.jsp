@@ -45,13 +45,10 @@
         %>
         <form>
             <CENTER>
-                <HR> 
-                <I>Selecciona en la columna final el producto que deseas comprar.</I>.
-                </HR>
                 <I>----------  </I><tr><I>BIENBENID@ <%= cliente.getNombre()%></I></tr>
                     <I>----------  </I><th><I>HISTORIAL DE COMPRAS</I></th>
                 <I>----------  </I><a href="Acceso.jsp">Cerrar Sesion</a>
-
+                <h5></h5>
                 <table border="1">
                     <thead>
                         <tr>

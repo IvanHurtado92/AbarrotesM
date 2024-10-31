@@ -29,28 +29,26 @@
                             <li> <a href="registro.jsp"  class = "normalMenu">Registrate_Aquí</a></li>
                     </ul>
                 </div>
-                <table border="1" width="30%" cellpadding="3">
-                    <thead>
-                        <tr>
-                            <th colspan="2">Login</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Nombre</td>
-                            <td><input type="text" name="usuario" value="" /></td>
-                        </tr>
-                        <tr>
-                            <td>Password</td>
-                            <td><input type="password" name="contrasenia" value="" /></td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" name="enviar" value="Entrar" /></td>
-                            <td><input type="reset" value="Limpiar" /></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <a href="Principal.html">Pagina Principal</a>
+                <div id="formulario">
+                    <table border="1" width="30%" cellpadding="3">
+                            <h2>Login</h2>
+                            <tbody>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td><input type="text" name="usuario" value="" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td><input type="password" name="contrasenia" value="" /></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="submit" name="enviar" value="Entrar" /></td>
+                                    <td><input type="reset" value="Limpiar" /></td>
+                                </tr>
+                            </tbody>
+                    </table>
+                    <a href="Principal.html">Pagina Principal</a>
+                </div>
             </center>
         </form>
         <% if (request.getParameter("enviar") != null) {
@@ -70,11 +68,17 @@
                         us = true;
         %>
     <center>
+        <script>
+            document.getElementById("formulario").style["display"] = 'none'
+        </script>
+        <br>
         <h3>Bienvenido <% out.println(uname.getNombreEmpleado().toString());%></h3>
         <P> <B>PORTAL PARA LOS PRODUCTOS</B> </P>
         <input type="button" onclick=" location.href = 'EliminarProducto.jsp?admin=0' " value="Productos" name="boton" />
         <P> <B>PORTAL PARA LA CONFIGURACION DE CLIENTES</B> </P>
         <input type="button" onclick=" location.href = 'EliminarCliente.jsp?admin=0' " value="Clientes" name="boton" />
+        <h5></h5>
+        <a href="Principal.html">Pagina Principal</a>
     </center>
     <%  break;
     } else {
