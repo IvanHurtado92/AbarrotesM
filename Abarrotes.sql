@@ -43,8 +43,9 @@ END; //
 DELIMITER ;
 
 
-insert into cliente values(null, 'Ivan', 'Hurtado', 'Lozano', '2002-09-20', 'dasd2432', 'ivan.hurtado92@outlook.com','hola', 'Olivares 505', '0123456789');
-insert into cliente values(null, 'Mau', 'de Hurtado', '', '2002-09-20', 'dasd2432', 'mauivanoutlook.com','hola', 'tenayuca 92', 1023456789);
+insert into cliente values(null, 'Ivan', 'Hurtado', 'Lozano', '2002-09-20', 'dasd2432', 'ivan.hurtado92@outlook.com','hola', 'Olivares 505', '0123456789', 0);
+insert into cliente values(null, 'Mau', 'de Hurtado', '', '2002-09-20', 'dasd2432', 'mauivanoutlook.com','hola', 'tenayuca 92', 1023456789, 0);
+insert into cliente values(null, 'Sergio', 'Perez', 'Mendoza', '1989-06-10', 'dasd2432', 'rbr@xeco.com','hola', 'Milton Kins', 1111111111, 0);
 
 insert into proveedor values(null, 'Miguel', 'Archuleta', 'Lopez', 'Flex');
 insert into proveedor values(null, 'Raul', 'Ramirez', 'Jerez', 'Predio Ramirez');
@@ -74,6 +75,11 @@ insert into empleado values(null, 'Ivan','adios', 'Hurtado', 'Lozano', '20 de se
 insert into empleado values(null, 'Pedro','hola', 'Rodriguez', 'Castro', '33 de diciembre', 'sadsa23e23adf', 10000, 'viudo', 'activo', 'prepa','Administrador');
 insert into empleado values(null, 'Juan','adios', 'Rodriguez', 'Castro', '33 de diciembre', 'sadsa23e23ad23', 10000, 'viudo', 'activo', 'prepa','Empleado');
 insert into empleado values(null, 'admin','caca', '', '', '', 'sadsa23e23ad21', 10000000, 'mujeriego', 'activo', 'Doctorado','Administrador');
+
+insert into carrito values(null, 1, 1, 3, 300);
+insert into carrito values(null, 1, 2, 4, 100);
+insert into carrito values(null, 2, 2, 4, 100);
+insert into carrito values(null, 2, 1, 3, 300);
 
 select * from cliente;
 select * from proveedor;
