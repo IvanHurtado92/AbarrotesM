@@ -87,6 +87,8 @@
                             carrito.setIdProducto(Integer.parseInt(chbcompras[i]));
                             carrito.setCantidad(Integer.parseInt(cantidades[i]));
                             carrito.setPrecio(producto.getPrecioUni()*carrito.getCantidad());
+                            producto.setExistencias(producto.getExistencias()-carrito.getCantidad());
+                            DAOproducto.actualizaProducto(producto);
 
                             DAO.guardarCarrito(carrito);
                         }
