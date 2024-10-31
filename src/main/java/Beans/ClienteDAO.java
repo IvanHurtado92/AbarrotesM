@@ -6,7 +6,6 @@ package Beans;
 
 import Hibernate.HibernateUtil;
 import Mapeos.Cliente;
-import Mapeos.Empleado;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -106,12 +105,9 @@ public class ClienteDAO {
 
     private void iniciaOperacion(){
        try{
-            System.out.println("Creando operacion");
             sesion = HibernateUtil.getSessionFactory().openSession();
             tx = sesion.beginTransaction();
-            System.out.println("Operacion creada bien");
         }catch(Exception e){
-            System.out.println("Fallo en la creacion de operacion");
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
