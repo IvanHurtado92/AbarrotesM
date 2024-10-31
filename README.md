@@ -22,5 +22,5 @@ Desarrollado desde la IDE Intellij
   - Weld SE
 
 ## Funciones faltantes
-- [ ] Carrito de compras
-- [ ] Historial de compras 
+- [x] Carrito de compras
+- [x] Historial de compras 
