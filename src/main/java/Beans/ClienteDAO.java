@@ -87,6 +87,32 @@ public class ClienteDAO {
         return 0;
     }
 
+    public Cliente encontrarUsuario(String nombre, String password) throws HibernateException {
+        Cliente clienteEncontrado = null;
+        try {
+            iniciaOperacion();
+
+            String hql = "FROM Cliente WHERE nombre = :nombre AND password = :password";
+            List<Cliente> resultados = sesion.createQuery(hql, Cliente.class)
+                    .setParameter("nombre", nombre)
+                    .setParameter("password", password)
+                    .list();
+
+            if (!resultados.isEmpty()) {
+                clienteEncontrado = resultados.get(0);  // Assuming there's only one unique match
+            }
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            sesion.close();
+        }
+        return clienteEncontrado;
+    }
+
+
+
     /* forma de actualizar 2 */
 //    public void updateEmpleado(Integer NoEmpleado, String NombreEmpleado) {
 //        iniciaOperacion();
