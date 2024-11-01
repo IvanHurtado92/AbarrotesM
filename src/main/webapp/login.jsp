@@ -31,7 +31,7 @@
         session.setAttribute("NombreEmpleado", login.getNombreEmpleado());
         //out.println("welcome " + login.getUname());
         //out.println("<a href='logout.jsp'>Log out</a>");
-        response.sendRedirect("compra.jsp");
+        response.sendRedirect("compraLista.jsp");
     } else {
         out.println("Datos no validos <a href='AutentificarAdmon.jsp'>Intenta de nuevo</a>");
     }*/
