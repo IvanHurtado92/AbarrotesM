@@ -1,22 +1,22 @@
 package Beans;
-import Hibernate.HibernateUtil;
-import Mapeos.Carrito;
-import java.util.List;
 
+import Hibernate.HibernateUtil;
 import Mapeos.CarritoAct;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class CarritoDAO {
+import java.util.List;
+
+public class CarritoActDAO {
     private Session sesion;
     private Transaction tx;
 
-    public int guardarCarrito(Carrito carrito) throws HibernateException {
+    public int guardarCarritoAct(CarritoAct carritoAct) throws HibernateException {
         int id = -1;
         try {
             iniciaOperacion();
-            id = (Integer) sesion.save(carrito);
+            id = (Integer) sesion.save(carritoAct);
             tx.commit();
         } catch (HibernateException he) {
             manejaExcepcion(he);
@@ -30,11 +30,11 @@ public class CarritoDAO {
         return id;
     }
 
-    public void eliminaCarrito(int ID_Carrito) throws HibernateException {
+    public void eliminaCarritoAct(int ID_CarritoAct) throws HibernateException {
         try {
             iniciaOperacion();
-            Carrito carrito = (Carrito) sesion.get(Carrito.class, ID_Carrito);
-            sesion.delete(carrito);
+            CarritoAct carritoAct = (CarritoAct) sesion.get(CarritoAct.class, ID_CarritoAct);
+            sesion.delete(carritoAct);
             tx.commit();
         } catch (HibernateException he) {
             manejaExcepcion(he);
@@ -43,34 +43,34 @@ public class CarritoDAO {
         }
     }
 
-    public Carrito obtenCarrito(int ID_Carrito) throws HibernateException {
-        Carrito carrito = null;
+    public CarritoAct obtenCarritoAct(int ID_CarritoAct) throws HibernateException {
+        CarritoAct carritoAct = null;
         try {
             iniciaOperacion();
-            carrito = (Carrito) sesion.get(Carrito.class, ID_Carrito);
+            carritoAct = (CarritoAct) sesion.get(CarritoAct.class, ID_CarritoAct);
         } finally {
             sesion.close();
         }
-        return carrito;
+        return carritoAct;
     }
 
-    public List<Carrito> obtenListaCarrito() throws HibernateException {
-        List<Carrito> listaCarritos = null;
+    public List<CarritoAct> obtenListaCarrito() throws HibernateException {
+        List<CarritoAct> listaCarritosAct = null;
 
         try {
             iniciaOperacion();
-            listaCarritos = sesion.createQuery("from Carrito").list();
+            listaCarritosAct = sesion.createQuery("from CarritoAct").list();
         } finally {
             sesion.close();
         }
-        return listaCarritos;
+        return listaCarritosAct;
     }
 
-    public List<Carrito> obtenCarritoPorCliente(int idCliente) throws HibernateException {
-        List<Carrito> listaCarritos = null;
+    public List<CarritoAct> obtenCarritoPorCliente(int idCliente) throws HibernateException {
+        List<CarritoAct> listaCarritosAct = null;
         try {
             iniciaOperacion();
-            listaCarritos = sesion.createQuery("from Carrito where idCliente = :idCliente", Carrito.class)
+            listaCarritosAct = sesion.createQuery("from CarritoAct where idCliente = :idCliente", CarritoAct.class)
                     .setParameter("idCliente", idCliente)
                     .getResultList();
         } catch (HibernateException he) {
@@ -79,14 +79,14 @@ public class CarritoDAO {
         } finally {
             sesion.close();
         }
-        return listaCarritos;
+        return listaCarritosAct;
     }
 
-    public List<Carrito> obtenCarritoPorGrupo(int grupoCarrito, int idCliente) throws HibernateException {
-        List<Carrito> listaCarritos = null;
+    public List<CarritoAct> obtenCarritoPorGrupo(int grupoCarrito, int idCliente) throws HibernateException {
+        List<CarritoAct> listaCarritosAct = null;
         try {
             iniciaOperacion();
-            listaCarritos = sesion.createQuery("from Carrito where grupoCarrito = :grupoCarrito and idCliente = :idCliente", Carrito.class)
+            listaCarritosAct = sesion.createQuery("from CarritoAct where grupoCarrito = :grupoCarrito and idCliente = :idCliente", CarritoAct.class)
                     .setParameter("grupoCarrito", grupoCarrito)
                     .setParameter("idCliente", idCliente)
                     .getResultList();
@@ -96,13 +96,13 @@ public class CarritoDAO {
         } finally {
             sesion.close();
         }
-        return listaCarritos;
+        return listaCarritosAct;
     }
 
-    public int actualizaCarrito(Carrito carrito) throws HibernateException {
+    public int actualizaCarrito(CarritoAct carritoAct) throws HibernateException {
         try {
             iniciaOperacion();
-            sesion.update(carrito);
+            sesion.update(carritoAct);
             tx.commit();
         } catch (HibernateException he) {
             manejaExcepcion(he);
@@ -111,6 +111,20 @@ public class CarritoDAO {
             sesion.close();
         }
         return 0;
+    }
+
+    public void borrarTabla() throws HibernateException {
+        try {
+            iniciaOperacion();
+            sesion.createQuery("delete from CarritoAct").executeUpdate();
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        }
+        finally {
+            sesion.close();
+        }
     }
 
     /* forma de actualizar 2 */

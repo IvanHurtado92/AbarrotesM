@@ -12,4 +12,5 @@
   <table-filter match-name="producto"/>
   <table-filter match-name="estado"/>
   <table-filter match-name="carrito"/>
+  <table-filter match-name="carritoAct"/>
 </hibernate-reverse-engineering>

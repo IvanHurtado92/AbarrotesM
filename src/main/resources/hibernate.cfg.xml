@@ -21,5 +21,6 @@
     <mapping resource="Mapeos/Inventario.hbm.xml"/>
     <mapping resource="Mapeos/Estado.hbm.xml"/>
     <mapping resource="Mapeos/Carrito.hbm.xml"/>
+    <mapping resource="Mapeos/CarritoAct.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
