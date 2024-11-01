@@ -41,14 +41,15 @@
             <h2>Buscador</h2>
             <h3>Ingresa la id del producto que buscas</h3>
             <input type="hidden" name="id" value="<%=id_cliente%>">
-            <input type="number" id="idprod" name="idprod" min="1" max="<%= DAOproducto.contarProductos() %>">
+            <input type="number" id="idprod" name="idprod" value="1" min="1" max="<%= DAOproducto.contarProductos() %>">
             <input type="submit" name="buscar" value="busca">
         </form>
+        <br>
             <%
             if(request.getParameter("buscar") != null){
-
+                if(!request.getParameter("idprod").isEmpty()){
                 Producto a = DAOproducto.obtenProducto(Integer.parseInt(request.getParameter("idprod")));
-                %>
+            %>
         <br>
         <form>
             <table border="1">
@@ -58,7 +59,6 @@
                     <th>Nombre producto</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
-                    <th>Elegir</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,33 +68,25 @@
                     <td><%= a.getPrecioUni() %></td>
                     <td>
                         <input type="number" id="cantidad_<%= a.getIdProducto() %>" name="cantidad"
-                               min="0" max="<%= a.getExistencias() %>" disabled>
-                    </td>
-                    <td>
-                        <input type="checkbox" name="habilitar" value="<%= a.getIdProducto() %>"
-                               onclick="toggleCantidad(<%= a.getIdProducto() %>)">
+                               min="1" max="<%= a.getExistencias() %>" value="1">
                     </td>
                 </tr>
                 </tbody>
             </table>
 
-            <script>
-                function toggleCantidad(id) {
-                    // Enable or disable the cantidad input based on the checkbox state
-                    var cantidadInput = document.getElementById("cantidad_" + id);
-                    cantidadInput.disabled = !cantidadInput.disabled;
-                }
-            </script>
             <input type="hidden" name="idprod" value="<%=a.getIdProducto()%>">
             <input type="hidden" name="precio" value="<%=a.getPrecioUni()%>">
             <input type="hidden" name="id" value="<%=request.getParameter("id")%>">
             <input type="submit" value="Agregar" name="agrega" onclick="">
         </form>
+        <br>
             <%
                 }
+                else {
+                    out.println("<h5>Ingresa un ID</h5>");
+                }
+                }
             if(request.getParameter("agrega") != null){
-                System.out.println("Dentrooooo");
-
                 Cliente cliente = DAOcliente.obtenCliente(id_cliente);
                 Integer grupo = cliente.getCarrito() + 1;
 
@@ -108,10 +100,6 @@
                 carrito.setIdProducto(idProd);
                 carrito.setCantidad(cantidad);
                 carrito.setPrecio(precio*cantidad);
-
-                // Producto producto = DAOproducto.obtenProducto(idProd);
-                // producto.setExistencias(producto.getExistencias()-cantidad);
-                // DAOproducto.actualizaProducto(producto);
 
                 DAOcarritoAct.guardarCarritoAct(carrito);
                 System.out.println("Guardadoooooooooooo");
@@ -132,6 +120,7 @@
                     <th>P. Unitario</th>
                     <th>Cantidad</th>
                     <th>Costo</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -149,6 +138,13 @@
                     <td><%= a.getPrecioUni()%></td>
                     <td><%= c.getCantidad()%></td>
                     <td><%= c.getPrecio()%></td>
+                    <td>
+                        <form>
+                            <input type="hidden" name="id" value="<%=request.getParameter("id")%>">
+                            <input type="hidden" name="idelim" value="<%=c.getIdCarrito()%>">
+                            <input type="submit" name="elim" value="Eliminar">
+                        </form>
+                    </td>
                 </tr>
                 <%}%>
                 </tbody>
@@ -158,6 +154,19 @@
             <input type="submit" value="Comprar" name="compra">
         </form>
         <%
+            if(request.getParameter("elim") != null){
+                for(int i=0;i<listaCarritoAct.size();i++){
+                    System.out.println(listaCarritoAct.get(i).getIdCarrito());
+                    if(listaCarritoAct.get(i).getIdCarrito().equals(Integer.parseInt(request.getParameter("idelim")))){
+                        DAOcarritoAct.eliminaCarritoAct(listaCarritoAct.get(i).getIdCarrito());
+                    }
+                }%>
+        <script>
+            window.location.href = "compraBusca.jsp?id=<%=id_cliente%>";
+        </script>
+        <%
+                System.out.println("Eliminadooooooooooooooooooooo");
+            }
             if(request.getParameter("compra") != null){
                 CarritoDAO DAOcarrito = new CarritoDAO();
                 for(CarritoAct c : listaCarritoAct){
@@ -169,6 +178,9 @@
                     carrito.setPrecio(c.getPrecio());
 
                     DAOcarrito.guardarCarrito(carrito);
+                    Producto producto = DAOproducto.obtenProducto(carrito.getIdCarrito());
+                    producto.setExistencias(producto.getExistencias()-carrito.getCantidad());
+                    DAOproducto.actualizaProducto(producto);
                 }
                 DAOcarritoAct.borrarTabla();
                 Cliente cliente = DAOcliente.obtenCliente(id_cliente);
