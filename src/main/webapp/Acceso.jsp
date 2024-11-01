@@ -30,11 +30,11 @@
                         <tbody>
                             <tr>
                                 <td>Nombre</td>
-                                <td><input type="text" name="usuario" value="" /></td>
+                                <td><input type="text" name="nombre" value="" /></td>
                             </tr>
                             <tr>
                                 <td>Password</td>
-                                <td><input type="password" name="contrasenia" value="" /></td>
+                                <td><input type="password" name="password" value="" /></td>
                             </tr>
                             <tr>
                                 <td><input type="submit" name="enviar" value="Entrar" /></td>
@@ -43,6 +43,7 @@
 
                         </tbody>
                     </table>
+                    <h4>No tienes cuenta? <a href="InsertarCliente.html">Crear cuenta</a></h4>
                     <a href="Principal.html">Pagina Principal</a>
                 </div>
             </center>
@@ -51,44 +52,22 @@
 
         <jsp:setProperty name="uname" property="*" />
         <%
-            int i = 1;
             boolean us = false;
-            ClienteDAO empDAO = new ClienteDAO();
-            List<Cliente> listaClientes = empDAO.obtenListaCliente();
-            for (i = 0; i < listaClientes.size(); i++) {
-                uname.setNombre(request.getParameter("usuario"));
-                uname.setPassword(request.getParameter("contrasenia"));
-                if ((uname.getNombre().toString().equals(listaClientes.get(i).getNombre().toString()))
-                        && (uname.getPassword().toString().equals(listaClientes.get(i).getPassword().toString()))) {
-                    us = true;
+            ClienteDAO DAOcliente = new ClienteDAO();
+            Cliente cliente = DAOcliente.encontrarUsuario(uname.getNombre(), uname.getPassword());
+            if(cliente != null){%>
+                <center>
+                    <h3>Bienvenido <% out.println(uname.getNombre().toString());%></h3>
+                    <input type="button" onclick=" location.href = 'Ventas.jsp?id=<%=cliente.getIdCliente()%>'" value="Ir al carrito" name="boton" />
+                </center>
+            <%}
+            else {%>
+                <center>
+                    <h3>NO TIENES UNA CUENTA, CREALA AHORA MISMO...</h3>
+                    <a href="InsertarCliente.html">Crear cuenta</a>
+                </center>
+            <%}
+        }
         %>
-        <script>
-            document.getElementById("formulario").style["display"] = 'none'
-        </script>
-        <center>
-            <br>
-            <h3>Bienvenido <% out.println(uname.getNombre().toString());%></h3>
-            <input type="button" onclick=" location.href = 'Ventas.jsp?id=<%=listaClientes.get(i).getIdCliente().toString()%>'" value="Ir al carrito" name="boton" />
-            <h5></h5>
-            <a href="Principal.html" id="prin2">Pagina Principal</a>
-        </center>
-    <%    break;
-    } else {
-    %>
-    <center>
-        <h3>NO TIENES UNA CUENTA, CREALA AHORA MISMO...</h3>
-        <a href="InsertarCliente.html">Crear cuenta</a>
-    </center>
-    <%            }
-        }
-        if (us == false) {
-    %>
-    <center>
-        <h3>Es posible que el usuario y/ó contraseña sean incorrectos.</h3>
-        <a href="Acceso.jsp">Intentar de nuevo</a>
-    </center>
-    <%                }
-        }
-    %>
 </body>
 </html>
