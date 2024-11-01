@@ -11,6 +11,7 @@
 <%@page import="Beans.ClienteDAO"%>
 <%@ page import="Beans.CarritoDAO" %>
 <%@ page import="Mapeos.Carrito" %>
+<%@ page import="Beans.CarritoActDAO" %>
 <jsp:useBean id="var1" scope="page" class="Mapeos.Producto" />
 <jsp:useBean id="var2" scope="page" class="Mapeos.Cliente" />
 <link rel="stylesheet" type="text/css" href="css.css" title="style">
@@ -39,6 +40,9 @@
             Cliente cliente = clienteDAO.obtenCliente(Integer.parseInt(request.getParameter("id")));
             Integer id_cliente = cliente.getIdCliente();
             Integer numCarro = cliente.getCarrito();
+            // eliminando el carrito actual para que si el usuario vuelve a ir a compraBusca esté vacío.
+//            CarritoActDAO carritoActDAO = new CarritoActDAO();
+//            carritoActDAO.borrarTabla();
         %>
 
             <CENTER>
