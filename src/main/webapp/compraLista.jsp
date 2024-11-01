@@ -47,7 +47,7 @@
                     <td><%= a.getPrecioUni() %></td>
                     <td>
                         <input type="number" id="cantidad_<%= a.getIdProducto() %>" name="cantidad"
-                               min="0" max="<%= a.getExistencias() %>" disabled>
+                               min="0" max="<%= a.getExistencias() %>" value="1" disabled>
                     </td>
                     <td>
                         <input type="checkbox" name="cbcompra" value="<%= a.getIdProducto() %>"
