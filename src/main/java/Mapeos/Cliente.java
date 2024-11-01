@@ -19,6 +19,7 @@ public class Cliente  implements java.io.Serializable {
      private String password;
      private String direccion;
      private String telefono;
+     private Integer carrito;
      private Paquete paquete;
      private Pedido pedido;
 
@@ -110,6 +111,9 @@ public class Cliente  implements java.io.Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public Integer getCarrito(){return this.carrito;}
+    public void setCarrito(Integer carrito){this.carrito = carrito;}
 
     public Paquete getPaquete() {
         return this.paquete;

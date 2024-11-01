@@ -35,6 +35,9 @@
         <property name="telefono" type="string">
             <column name="Telefono" length="100" />
         </property>
+        <property name="carrito" type="java.lang.Integer">
+            <column name="Carrito" />
+        </property>
         <one-to-one name="paquete" class="Mapeos.Paquete"></one-to-one>
         <one-to-one name="pedido" class="Mapeos.Pedido"></one-to-one>
     </class>
