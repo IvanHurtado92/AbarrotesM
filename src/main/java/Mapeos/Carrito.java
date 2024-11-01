@@ -3,6 +3,7 @@ package Mapeos;
 public class Carrito implements java.io.Serializable {
 
     private Integer idCarrito;
+    private Integer grupoCarrito;
     private Integer idCliente;
     private Integer idProducto;
     private Integer cantidad;
@@ -10,12 +11,15 @@ public class Carrito implements java.io.Serializable {
 
     public Carrito() {}
 
-    public Carrito(Integer idCliente, Integer idProducto, Integer cantidad) {
+    public Carrito(Integer grupoCarrito,Integer idCliente, Integer idProducto, Integer cantidad) {
+        this.grupoCarrito = grupoCarrito;
         this.idCliente = idCliente;
         this.idProducto = idProducto;
         this.cantidad = cantidad;
     }
 
+    public Integer getGrupoCarrito(){return grupoCarrito;}
+    public void setGrupoCarrito(Integer grupoCarrito){this.grupoCarrito = grupoCarrito;}
     public Integer getIdCarrito() {
         return idCarrito;
     }

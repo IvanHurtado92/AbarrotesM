@@ -8,6 +8,9 @@
             <column name="id_carrito" />
             <generator class="identity" />
         </id>
+        <property name="grupoCarrito" type="java.lang.Integer">
+            <column name="grupo_carrito" />
+        </property>
         <property name="idCliente" type="java.lang.Integer">
             <column name="id_cliente" />
         </property>
