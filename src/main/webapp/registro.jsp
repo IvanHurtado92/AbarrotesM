@@ -235,7 +235,7 @@
         <jsp:setProperty name="cliente" property="*" />
         <%
             ClienteDAO registro = new ClienteDAO();
-            cliente.setCarrito(1);
+            cliente.setCarrito(0);
             int id_cliente = registro.guardarCliente(cliente);
             if (id_cliente > 0) {
         %>
