@@ -75,6 +75,17 @@ public class ProductoDAO {
         return listaProductos;
     }
 
+    public int contarProductos() throws HibernateException {
+        int contador = 0;
+        try {
+            iniciaOperacion();
+            contador = sesion.createQuery("from Producto").list().size();
+        } finally {
+            sesion.close();
+        }
+        return contador;
+    }
+
     public int actualizaProducto(Producto producto) throws HibernateException {
         try {
             iniciaOperacion();
