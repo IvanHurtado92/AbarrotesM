@@ -9,6 +9,8 @@
 <%@page import="Beans.ProductoDAO"%>
 <%@ page import="Beans.CarritoDAO" %>
 <%@ page import="Mapeos.Carrito" %>
+<%@ page import="Beans.ClienteDAO" %>
+<%@ page import="Mapeos.Cliente" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,11 +24,11 @@
     List<Producto> listaproductos = productoDAO.obtenListaProducto();
 %>
     <CENTER>
+        <HR>
+        <I>Para comprar un producto seleccionarlo en la columna final y se habilitará el campo de cantidad <a href="Ventas.jsp?id=<%=request.getParameter("id")%>">Regresar</a></I>.
+        <h2></h2>
+        </HR>
         <form>
-            <HR>
-            <I>Para comprar un producto seleccionarlo en la columna final y se habilitará el campo de cantidad <a href="Ventas.jsp?id=<%=request.getParameter("id")%>">Regresar</a></I>.
-            <h2></h2>
-            </HR>
             <table border="1">
                 <thead>
                 <tr>
@@ -76,13 +78,16 @@
                 Integer id_cliente = Integer.parseInt(request.getParameter("id"));
                 ProductoDAO DAOproducto = new ProductoDAO();
                 Producto producto;
+                ClienteDAO DAOcliente = new ClienteDAO();
+                Cliente cliente;
 
                 if(chbcompras != null && chbcompras.length > 0){
+                    cliente = DAOcliente.obtenCliente(id_cliente);
+                    Integer grupo = cliente.getCarrito() + 1;
                     for (int i = 0; i < chbcompras.length; i++) {
                         if(!cantidades[i].equals("0")){
-
                             producto = DAOproducto.obtenProducto(Integer.parseInt(chbcompras[i]));
-
+                            carrito.setGrupoCarrito(grupo);
                             carrito.setIdCliente(id_cliente);
                             carrito.setIdProducto(Integer.parseInt(chbcompras[i]));
                             carrito.setCantidad(Integer.parseInt(cantidades[i]));
@@ -93,6 +98,9 @@
                             DAO.guardarCarrito(carrito);
                         }
                     }
+                    cliente.setCarrito(grupo);
+                    DAOcliente.actualizaCliente(cliente);
+                    System.out.println(grupo);
                     out.println("Producto/s Comprado/s");
                 } else {
                     out.println("<p>Debes seleccionar al menos un producto para comprarlo.</p>");
