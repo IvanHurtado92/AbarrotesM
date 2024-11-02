@@ -29,6 +29,7 @@
     ClienteDAO DAOcliente = new ClienteDAO();
     Integer id_cliente = Integer.parseInt(request.getParameter("id"));
     Float total = 0f;
+    Boolean habilitar = true;
 
     List<CarritoAct> listaCarritoAct = DAOcarritoAct.obtenListaCarrito();
 %>
@@ -67,8 +68,16 @@
                     <td><%= a.getNombreProducto() %></td>
                     <td><%= a.getPrecioUni() %></td>
                     <td>
-                        <input type="number" id="cantidad_<%= a.getIdProducto() %>" name="cantidad"
-                               min="1" max="<%= a.getExistencias() %>" value="1">
+                        <% if(!a.getExistencias().equals(0)){%>
+                            <input type="number" id="cantidad_<%= a.getIdProducto() %>" name="cantidad"
+                                   min="1" max="<%= a.getExistencias() %>" value="1">
+
+                        <%}
+                        else {%>
+                            <i>Sin existencias</i>
+                        <%
+                        habilitar = false;
+                        }%>
                     </td>
                 </tr>
                 </tbody>
@@ -77,7 +86,11 @@
             <input type="hidden" name="idprod" value="<%=a.getIdProducto()%>">
             <input type="hidden" name="precio" value="<%=a.getPrecioUni()%>">
             <input type="hidden" name="id" value="<%=request.getParameter("id")%>">
-            <input type="submit" value="Agregar" name="agrega" onclick="">
+            <input type="submit" value="Agregar" id="botonagrega" name="agrega" onclick="" <%
+                if(!habilitar){%>
+                    disabled
+                <%}%>
+            >
         </form>
         <br>
             <%
@@ -155,10 +168,10 @@
         </form>
         <%
             if(request.getParameter("elim") != null){
-                for(int i=0;i<listaCarritoAct.size();i++){
-                    System.out.println(listaCarritoAct.get(i).getIdCarrito());
-                    if(listaCarritoAct.get(i).getIdCarrito().equals(Integer.parseInt(request.getParameter("idelim")))){
-                        DAOcarritoAct.eliminaCarritoAct(listaCarritoAct.get(i).getIdCarrito());
+                for (CarritoAct carritoAct : listaCarritoAct) {
+                    System.out.println(carritoAct.getIdCarrito());
+                    if (carritoAct.getIdCarrito().equals(Integer.parseInt(request.getParameter("idelim")))) {
+                        DAOcarritoAct.eliminaCarritoAct(carritoAct.getIdCarrito());
                     }
                 }%>
         <script>
@@ -178,7 +191,7 @@
                     carrito.setPrecio(c.getPrecio());
 
                     DAOcarrito.guardarCarrito(carrito);
-                    Producto producto = DAOproducto.obtenProducto(carrito.getIdCarrito());
+                    Producto producto = DAOproducto.obtenProducto(carrito.getIdProducto());
                     producto.setExistencias(producto.getExistencias()-carrito.getCantidad());
                     DAOproducto.actualizaProducto(producto);
                 }
@@ -190,6 +203,10 @@
                 DAOcliente.actualizaCliente(cliente);
                 %>
         <h3>Productos comprados</h3>
+        <a href="compraBusca.jsp?id=<%=id_cliente%>">Volver a comprar</a>
+        <script>
+
+        </script>
             <%}%>
     </center
 </body>
