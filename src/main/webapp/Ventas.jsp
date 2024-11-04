@@ -72,7 +72,7 @@
                         <h3>Selecciona el carrito/historial que deseas ver</h3>
                         <td>
                             <input type="number" id="carritoSelect" name="grupo"
-                                   min="1" max="<%= numCarro %>">
+                                   min="1" max="<%= numCarro %>" value="1">
                         </td>
                         <input type="hidden" name="id" value="<%=id_cliente%>">
                         <input type="hidden" name="elegir" value="Elegir">
