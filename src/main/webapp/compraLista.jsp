@@ -35,26 +35,31 @@
                     <th>Numero producto</th>
                     <th>Nombre producto</th>
                     <th>Precio</th>
+                    <th>Existencias</th>
                     <th>Cantidad</th>
                     <th>Elegir</th>
                 </tr>
                 </thead>
                 <tbody>
-                <% for (Producto a : listaproductos) { %>
+                <% for (Producto a : listaproductos) {
+                    if(!a.getExistencias().equals(0)){
+                %>
                 <tr>
                     <td><%= a.getIdProducto() %></td>
                     <td><%= a.getNombreProducto() %></td>
                     <td><%= a.getPrecioUni() %></td>
+                    <td><%= a.getExistencias()%></td>
                     <td>
                         <input type="number" id="cantidad_<%= a.getIdProducto() %>" name="cantidad"
-                               min="0" max="<%= a.getExistencias() %>" value="1" disabled>
+                               min="1" max="<%= a.getExistencias() %>" value="1" disabled>
                     </td>
                     <td>
                         <input type="checkbox" name="cbcompra" value="<%= a.getIdProducto() %>"
                                onclick="toggleCantidad(<%= a.getIdProducto() %>)">
                     </td>
                 </tr>
-                <% } %>
+                <% }
+                }%>
                 </tbody>
             </table>
 
